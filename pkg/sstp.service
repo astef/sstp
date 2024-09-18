@@ -1,0 +1,16 @@
+[Unit]
+Description=Shadowsocks Transparent Proxy
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/run/sstp.pid
+WorkingDirectory=/etc/sstp
+EnvironmentFile=/etc/sstp/.env
+ExecStart=ss-redir -s ${SERVER_IP} -p ${SERVER_PORT} -m ${SERVER_METHOD} -k ${SERVER_PWD} -b ${LOCAL_IP} -l ${LOCAL_PORT} --no-delay -u -T -v -f /run/sstp.pid
+ExecStartPost=/etc/sstp/start_post.sh
+ExecStop=/etc/sstp/stop.sh
+User=root
+Restart=no
+TimeoutStopSec=10
+KillMode=control-group
