@@ -3,9 +3,6 @@
 SERVICE_NAME="sstp.service"
 SERVICE_FILE="./pkg/$SERVICE_NAME"
 ENV_FILE="./pkg/.env"
-LIB_SCRIPT="./pkg/lib.sh"
-STOP_SCRIPT="./pkg/stop.sh"
-POST_START_SCRIPT="./pkg/start_post.sh"
 CONFIG_DIR="/etc/sstp"
 
 (
