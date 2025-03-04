@@ -30,9 +30,9 @@ start_iptables() {
     iptables -t mangle -A SSREDIR -d 240.0.0.0/4        -j RETURN
     iptables -t mangle -A SSREDIR -d 255.255.255.255/32 -j RETURN
 
-    # mark the first packet of the connection
-    iptables -t mangle -A SSREDIR -p tcp --syn                      -j MARK --set-mark 0x2333
-    iptables -t mangle -A SSREDIR -p udp -m conntrack --ctstate NEW -j MARK --set-mark 0x2333
+    # mark tcp/udp packets
+    iptables -t mangle -A SSREDIR -p tcp -j MARK --set-mark 0x2333
+    iptables -t mangle -A SSREDIR -p udp -j MARK --set-mark 0x2333
 
     # packet-mark -> connection-mark
     iptables -t mangle -A SSREDIR -j CONNMARK --save-mark
